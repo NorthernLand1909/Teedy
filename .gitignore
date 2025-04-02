@@ -18,6 +18,8 @@ docs/*
 !docs/.gitkeep
 .vscode
 data/docs/log/*
+data/db/*
+target/site/*
 
 #macos
 .DS_Store

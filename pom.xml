@@ -72,6 +72,18 @@
 
   <repositories>
     <repository>
+      <id>central</id>
+      <name>Maven Central</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+
+    <repository>
       <id>ApacheSnapshot</id>
       <name>Apache Repository</name>
       <url>https://repository.apache.org/content/groups/snapshots/</url>
@@ -80,6 +92,16 @@
       </snapshots>
     </repository>
   </repositories>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>3.4.1</version>
+      </plugin>
+    </plugins>
+  </reporting>
 
   <build>
     <plugins>
@@ -116,6 +138,13 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${org.eclipse.jetty.jetty-maven-plugin.version}</version>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>4.0.0-M7</version>
+      </plugin>
+
     </plugins>
   </build>
 
@@ -486,6 +515,13 @@
         <groupId>com.levigo.jbig2</groupId>
         <artifactId>levigo-jbig2-imageio</artifactId>
         <version>${com.levigo.jbig2.levigo-jbig2-imageio.version}</version>
+      </dependency>
+
+      <!-- Doxia -->
+      <dependency>
+        <groupId>org.apache.maven.doxia</groupId>
+        <artifactId>doxia-site-renderer</artifactId>
+        <version>1.9.2</version>
       </dependency>
 
     </dependencies>
