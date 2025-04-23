@@ -19,7 +19,7 @@ docs/*
 .vscode
 data/docs/log/*
 data/db/*
-target/site/*
+target/*
 
 #macos
 .DS_Store
