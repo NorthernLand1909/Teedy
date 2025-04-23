@@ -94,12 +94,36 @@
   </repositories>
 
   <reporting>
+    <outputDirectory>${project.build.directory}/site</outputDirectory>
+    <excludeDefaults>false</excludeDefaults>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
         <version>3.4.1</version>
       </plugin>
+
+      <!--PMD plugin-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.24.0</version>
+        <configuration>
+          <rulesets>
+            <ruleset>${project.basedir}/../customize-rules.xml</ruleset>
+          </rulesets>
+          <failOnViolation>false</failOnViolation>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>pmd</report>
+              <report>cpd</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
     </plugins>
   </reporting>
 
@@ -142,10 +166,50 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>4.0.0-M7</version>
+        <version>3.12.1</version>
+      </plugin>
+
+      <!--PMD plugin-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.24.0</version> <!-- 根据需要使用最新版本 -->
+        <configuration>
+          <rulesets>
+            <ruleset>${project.basedir}/../customize-rules.xml</ruleset>
+          </rulesets>
+          <failOnViolation>false</failOnViolation> <!-- 加上这个：不因 violation 失败 -->
+        </configuration>
+        <executions>
+          <execution>
+            <phase>verify</phase> <!-- 在 verify 阶段运行 PMD -->
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
     </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.12.1</version>
+          <configuration>
+            <reportPlugins>
+              <reportPlugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+              </reportPlugin>
+            </reportPlugins>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
   </build>
 
   <modules>
@@ -526,5 +590,12 @@
 
     </dependencies>
   </dependencyManagement>
+
+  <distributionManagement>
+    <site>
+      <id>local-site</id>
+      <url>file://${project.build.directory}/site</url>
+    </site>
+  </distributionManagement>
 
 </project>

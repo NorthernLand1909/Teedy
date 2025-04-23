@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Custom Metrics Ruleset"
+         xmlns="https://pmd.github.io/pmd-7.12.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://pmd.github.io/pmd-7.12.0 https://pmd.github.io/pmd-7.12.0/ruleset_7_12_0.xsd"
+         xmlns:pmd="https://pmd.github.io/pmd-7.12.0">
+
+    <description>
+        Custom ruleset for code metrics: LoC, Cyclomatic Complexity, WMC, CBO, LCOM.
+    </description>
+    <rule ref="category/java/design.xml/CyclomaticComplexity" /><!-- CC -->
+    <rule ref="category/java/design.xml/DataClass" /> <!-- WMC -->
+    <rule ref="category/java/design.xml/GodClass" /> <!-- WMC --> <!-- TCC -->
+    <rule ref="category/java/design.xml/CouplingBetweenObjects" /> <!-- CBO -->
+</ruleset>
